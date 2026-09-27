@@ -23,6 +23,8 @@ jobs:
       # Everything is done as the agent's GitHub App (shows as <app>[bot]). App tokens, unlike the
       # default GITHUB_TOKEN, trigger other workflows, so the PR starts CI and the reviewer.
       ISSUE: ${{ github.event.issue.number }}
+      VITE_SUPABASE_URL: https://placeholder.supabase.co
+      VITE_SUPABASE_ANON_KEY: placeholder-anon-key
       RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
     steps:
       - name: Get agent identity (GitHub App token)

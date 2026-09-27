@@ -20,6 +20,8 @@ env:
   BASE_SHA: ${{ github.event.pull_request.base.sha }}
   HEAD_SHA: ${{ github.event.pull_request.head.sha }}
   MAX_FIX_ROUNDS: "3"
+  VITE_SUPABASE_URL: https://placeholder.supabase.co
+  VITE_SUPABASE_ANON_KEY: placeholder-anon-key
   # Paths only a human may change. Keep in sync with CLAUDE.md.
   OFF_LIMITS: '^(\.github/|CLAUDE\.md$|supabase/migrations/|supabase/functions/(issue-app-token|sync-entitlement|delete-account)/|src/lib/appAccess\.ts$|ios/|capacitor\.config\.ts$|vercel\.json$|\.env)'
 
