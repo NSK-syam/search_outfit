@@ -77,29 +77,35 @@ describe("search access backend helpers", () => {
   });
 
   it("normalizes a verified client entitlement snapshot", () => {
+    const verifiedAt = new Date();
+    const expiresAt = new Date(verifiedAt.getTime() + 30 * 24 * 60 * 60 * 1000);
+
     expect(
-      normalizeVerifiedEntitlementInput({
-        expiresAt: "2026-04-21T00:00:00.000Z",
-        metadata: {
-          environment: "sandbox",
+      normalizeVerifiedEntitlementInput(
+        {
+          expiresAt: expiresAt.toISOString(),
+          metadata: {
+            environment: "sandbox",
+          },
+          originalTransactionId: "orig_123",
+          productId: "searchoutfit_monthly",
+          purchaseSource: "app_store",
+          renewalPeriod: "monthly",
+          status: "active",
+          verifiedAt: verifiedAt.toISOString(),
+          willRenew: true,
         },
-        originalTransactionId: "orig_123",
-        productId: "searchoutfit_monthly",
-        purchaseSource: "app_store",
-        renewalPeriod: "monthly",
-        status: "active",
-        verifiedAt: "2026-03-21T12:00:00.000Z",
-        willRenew: true,
-      }),
+        verifiedAt,
+      ),
     ).toMatchObject({
-      expires_at: "2026-04-21T00:00:00.000Z",
+      expires_at: expiresAt.toISOString(),
       is_active: true,
       original_transaction_id: "orig_123",
       product_id: "searchoutfit_monthly",
       purchase_source: "app_store",
       renewal_period: "monthly",
       status: "active",
-      verified_at: "2026-03-21T12:00:00.000Z",
+      verified_at: verifiedAt.toISOString(),
       will_renew: true,
     });
   });
